@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+    <!--Render by Accretion Display or RAD by James Scott McDowell-->
+    <!--(a derivative work of Paul Hayes's 3D CSS Cube Experiment)-->
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="user-scalable=no" />
+        <title>Old Earth 2148</title>
+        <link rel="stylesheet" type="text/css" href="css/layout.css">
+        <link rel="stylesheet" type="text/css" href="css/control.css">
+        <link rel="stylesheet" type="text/css" href="css/stage.css">
+        <link rel="stylesheet" type="text/css" href="css/voxel.css">
+        <script src="js/global.js"></script>
+        <script src="js/voxel.js"></script>
+        <script src="js/orientation.js"></script>
+        <style>
+            body {
+              background:#2EB5E5 ;
+              margin: 0;
+              height: 100%;
+              overflow: hidden;
+            }
+            
+            .sun { 
+              position: absolute;
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+                margin: auto;  
+                width:70px;
+                height:70px;
+                border-radius:50%;  
+                background:white;
+                opacity:0.9;            
+                box-shadow: 0px 0px 40px 15px white;  
+            }
+            
+            .sun2 { 
+              position: absolute;
+                top:0;
+                left:0;
+                right:10vw;
+                bottom:0;
+                margin: auto;  
+                width:35px;
+                height:35px;
+                border-radius:50%;  
+                background:white;
+                opacity:0.9;            
+                box-shadow: 0px 0px 40px 15px white;  
+            }
+
+            .ray_box {
+              position: absolute;
+              margin: auto;
+                top:0px;
+                left:0;
+                right:0;
+                bottom:0;   
+              width:70px;  
+              -webkit-animation: ray_anim 120s linear infinite;
+              animation: ray_anim 120s linear infinite;
+            }
+            .ray {  
+                background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+                    background: linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%); 
+                margin-left:10px;
+                border-radius:80% 80% 0 0;
+                position:absolute;
+                opacity:0.1;
+            }
+            
+            .ray1 {    
+                height:170px;
+                width:30px;
+               -webkit-transform: rotate(180deg);
+                top:-175px;
+                left: 15px;
+            }
+            .ray2 {
+                height:100px;
+                width:8px;
+               -webkit-transform: rotate(220deg);
+                top:-90px;
+                left: 75px;
+            }
+            .ray3 {
+                height:170px;
+                width:50px;
+               -webkit-transform: rotate(250deg);
+                top:-80px;
+                left: 100px;
+            }
+            .ray4 {
+                height:120px;
+                width:14px;
+               -webkit-transform: rotate(305deg);
+                top:30px;
+                left: 100px;
+            }
+            .ray5 {
+                height:140px;
+                width:30px;
+               -webkit-transform: rotate(-15deg);
+                top:60px;
+                left: 40px;
+            }
+            .ray6 {
+                height:90px;
+                width:50px;
+               -webkit-transform: rotate(30deg);
+                top:60px;
+                left: -40px;
+            }
+            .ray7 {
+                height:180px;
+                width:10px;
+               -webkit-transform: rotate(70deg);
+                top:-35px;
+                left: -40px;
+            }
+            .ray8 {
+                height:120px;
+                width:30px;
+               -webkit-transform: rotate(100deg);
+                top:-45px;
+                left:-90px;
+            }
+            .ray9 {
+                height:80px;
+                width:10px;
+               -webkit-transform: rotate(120deg);
+                top:-65px;
+                left:-60px;
+            }
+            .ray10 {
+                height:190px;
+                width:23px;
+               -webkit-transform: rotate(150deg);
+                top:-185px;
+                left: -60px;
+            }
+            
+            
+            @-webkit-keyframes ray_anim { 
+                    0% { -webkit-transform: rotate(0deg); transform: rotate(0deg);}    
+                100% { -webkit-transform: rotate(360deg); transform: rotate(360deg);}
+            }
+
+            .leftStroke {
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+                filter: FlipH;
+                -ms-filter: "FlipH";
+            }
+            .rightStroke {
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+                filter: FlipH;
+                -ms-filter: "FlipH";
+            }
+        </style>
+    </head>
+    <body onkeydown='rotateByArrowKeys(event);'>
+        <div class="column-left vertical-horizontal-center columnHeight">
+<!--
+            <div class="buttonPanel">
+                <textarea id="importExport" style="width:11.65rem;height:6rem;"></textarea>
+                <div class="button button-column-left" onclick="transform('{\'stage\':\'import\'}')" ontouch="transform('{\'stage\':\'import\'}')"><p>import</p></div>
+                <div class="button button-column-center" onclick="transform('{\'stage\':\'pitchCW\'}');updateViewDirection('up');" ontouch="transform('{\'stage\':\'pitchCW\'}')"><p>&uarr;</p></div>
+                <div class="button button-column-right" onclick="transform('{\'stage\':\'reset\'}')" ontouch="transform('{\'stage\':\'reset\'}')"><p>reset</p></div>
+                <br>
+                <div class="button button-column-left" onclick="transform('{\'stage\':\'yawCW\'}');updateViewDirection('left');" ontouch="transform('{\'stage\':\'yawCW\'}')"><p>&larr;</p></div>
+                <div class="button button-column-center" onclick="transform('{\'stage\':\'center\'}')" ontouch="transform('{\'stage\':\'center\'}')"><p>center</p></div>
+                <div class="button button-column-right" onclick="transform('{\'stage\':\'yawCCW\'}');updateViewDirection('right');" ontouch="transform('{\'stage\':\'yawCCW\'}')"><p>&rarr;</p></div>
+                <br>
+                <div class="button button-column-left" onclick="toggleVisibility('tracePlane');" ontouch="toggleVisibility('tracePlane');"><p>ref img (y/n)</p></div>
+                <div class="button button-column-center" onclick="transform('{\'stage\':\'pitchCCW\'}');updateViewDirection('down');" ontouch="transform('{\'stage\':\'pitchCCW\'}')"><p>&darr;</p></div>
+                <div class="button button-column-right" onclick="transform('{\'stage\':\'export_blender\'}')" ontouch="transform('{\'stage\':\'export_blender\'}')"><p>export</p></div>
+            </div>
+            <div style="width:2vw;height:2vw;background-color:red;" onclick="nLineMaker(10,'right');">&rarr;</div><br>
+            <div style="width:2vw;height:2vw;background-color:orange;" onclick="nLineMaker(10,'in');"></div><br>
+            <div style="width:2vw;height:2vw;background-color:yellow;" onclick="nLineMaker(10,'left');">&larr;</div><br>
+            <div style="width:2vw;height:2vw;background-color:green;" onclick="nLineMaker(10,'out');"></div><br>
+            <div style="width:2vw;height:2vw;background-color:blue" onclick="nLineMaker(10,'up');">&uarr;</div><br>
+            <div style="width:2vw;height:2vw;background-color:indigo;" onclick="nLineMaker(10,'down');">&darr;</div><br>
+-->
+        </div>
+        <!--Stage object, a cube consisting of six face elements.-->
+        <div id="stage" class="column-center">
+            <div id="cube" onclick='rotateByMouse(event);'>
+                <!--top-->
+                <div id="face1" class="face"></div>
+                <!--front-->
+                <div id="face2" class="face two"></div>
+                <!--right-->
+                <div id="face3" class="face three"></div>
+                <!--back-->
+                <div id="face4" class="face four">
+                    <div class="sun">
+                        <div class="ray_box">
+                            <div class="ray ray1"></div>
+                            <div class="ray ray2"></div>
+                            <div class="ray ray3"></div>
+                            <div class="ray ray4"></div>
+                            <div class="ray ray5"></div>
+                            <div class="ray ray6"></div>
+                            <div class="ray ray7"></div>
+                            <div class="ray ray8"></div>
+                            <div class="ray ray9"></div>
+                            <div class="ray ray10"></div>
+                        </div>
+                    </div>
+                    <div class="sun2">
+                        <div class="ray_box">
+                            <div class="ray ray1"></div>
+                            <div class="ray ray2"></div>
+                            <div class="ray ray3"></div>
+                            <div class="ray ray4"></div>
+                            <div class="ray ray5"></div>
+                            <div class="ray ray6"></div>
+                            <div class="ray ray7"></div>
+                            <div class="ray ray8"></div>
+                            <div class="ray ray9"></div>
+                            <div class="ray ray10"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--left-->
+                <div id="face5" class="face five"></div>
+                <!--bottom-->
+                <div id="face6" class="face six"></div>
+                <!--trace plane-->
+                <div id="tracePlane" class="face four" style="width:30px;height:30px;"></div>
+            </div>
+        </div>
+        <div class="column-right vertical-horizontal-center columnHeight">
+<!--
+            <div class="buttonPanel" style="margin: 0">
+                <div id="rightPanelButton0" class="button button-column-left" onclick="changePanelMode();/*translateSet();*/"><p>&#8756;</p></div>
+                <div id="rightPanelButton1" class="button button-column-center" onmousedown="changeVoxelDirectionByView('up');" onmouseup="updateGridOnMouseUp();" ontouchstart="changeVoxelDirectionByView('up');" ontouchend="updateGridOnMouseUp();"><p>&uarr;</p></div>
+                <div id="rightPanelButton2" class="button button-column-right"><p></p></div>
+                <br>
+                <div id="rightPanelButton3" class="button button-column-left" onmousedown="changeVoxelDirectionByView('left');" onmouseup="updateGridOnMouseUp();" ontouchstart="changeVoxelDirectionByView('left');" ontouchend="updateGridOnMouseUp();"><p>&larr;</p></div>
+                <div id="rightPanelButton4" class="button button-column-center" onclick="transform('{\'vertex\':\'add\'}');" ontouch="('{\'vertex\':\'add\'}');"><p>&#9632;</p></div>
+                <div id="rightPanelButton5" class="button button-column-right" onmousedown="changeVoxelDirectionByView('right');" onmouseup="updateGridOnMouseUp();" ontouchstart="changeVoxelDirectionByView('right');" ontouchend="updateGridOnMouseUp();"><p>&rarr;</p></div>
+                <br>
+                <div id="rightPanelButton6" class="button button-column-left" onmousedown="changeVoxelDirectionByView('in');" onmouseup="updateGridOnMouseUp();" ontouchstart="changeVoxelDirectionByView('in');" ontouchend="updateGridOnMouseUp();"><p>&#x2297</p></div>
+                <div id="rightPanelButton7" class="button button-column-center" onmousedown="changeVoxelDirectionByView('down');" onmouseup="updateGridOnMouseUp();" ontouchstart="changeVoxelDirectionByView('down');" ontouchend="updateGridOnMouseUp();"><p>&darr;</p></div>
+                <div id="rightPanelButton8" class="button button-column-right" onmousedown="changeVoxelDirectionByView('out');" onmouseup="updateGridOnMouseUp();" ontouchstart="changeVoxelDirectionByView('out');" ontouchend="updateGridOnMouseUp();"><p>&#x2299</p></div>
+                <br>
+                <div id="rightPanelButton9" class="button button-column-left" onmousedown="updateGridOnMouseDown('{\'vertex\':\'back\'}', cycleInterval);" onmouseup="updateGridOnMouseUp();" ontouchstart="updateGridOnMouseDown('{\'vertex\':\'back\'}', cycleInterval);" ontouchend="updateGridOnMouseUp();"><p><<</p></div>
+                <div id="rightPanelButton10" class="button button-column-center" onclick="transform('{\'vertex\':\'delete\'}');" ontouch="transform('{\'vertex\':\'delete\'}');"><p>x</p></div>
+                <div id="rightPanelButton11" class="button button-column-right" onmousedown="updateGridOnMouseDown('{\'vertex\':\'forward\'}', cycleInterval);" onmouseup="updateGridOnMouseUp();" ontouchstart="updateGridOnMouseDown('{\'vertex\':\'forward\'}', cycleInterval);" ontouchend="updateGridOnMouseUp();"><p>>></p></div>
+            </div>
+-->
+        </div>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="js/jquery.ripples-min.js"></script>
+    <script>
+        //A cursor voxel must be created directly after the entire page has finished loading.
+        createCursor();
+    </script>
+<script>
+        $(document).ready(function() {
+            try {
+                $('#tracePlane').ripples({
+                    resolution: 1024,
+                    dropRadius: 25, //px
+                    perturbance: 0.5,
+                    interactive: false
+                });
+            }
+            catch (e) {
+                $('.error').show().text(e);
+            }
+        
+            $('.js-ripples-disable').on('click', function() {
+                $('body, #surface').ripples('destroy');
+                $(this).hide();
+            });
+        
+            $('.js-ripples-play').on('click', function() {
+                $('body, #surface').ripples('play');
+            });
+        
+            $('.js-ripples-pause').on('click', function() {
+                $('body, #surface').ripples('pause');
+            });
+        
+            // Automatic drops
+            setInterval(function() {
+                var $el = $('#tracePlane');
+                var x = Math.random() * $el.outerWidth();
+                var y = Math.random() * $el.outerHeight();
+                var dropRadius = 20;
+                var strength = 0.40 + Math.random() * 0.40;
+        
+                $el.ripples('drop', x, y, dropRadius, strength);
+            }, 400);
+        });
+        </script>
+    <script src="js/stage.js"></script>
+    <script src="js/control.js"></script>
+    <script>
+var swimAnimation = true;
+$('body').on('keydown keyup',function(e){
+    if(e.which==65){
+        updateGrid("left");
+    }
+    else if(e.which==67){
+        capturePoint();
+    }
+    else if(e.which==82){
+        resetStage();
+    }
+    else if(e.which==68){
+        updateGrid("right");
+    }
+    else if(e.which==81){
+        updateGrid("in");
+    }
+    else if(e.which==69){
+        updateGrid("out");
+    }
+    else if(e.which==87){
+        updateGrid("down");
+        //Use when you are done composing the entire scene.
+        translateSet("down");
+    }
+    else if(e.which==83){
+        updateGrid("up");
+        //Use when you are done composing the entire scene.
+        translateSet("up");
+    }
+});
+    updateGrid("right");
+    updateGrid("down");
+    for(var i = 0; i < 20; i++){
+        updateGrid("right");
+    }
+    for(var i = 0; i < 10; i++){
+        updateGrid("down");
+    }
+
+    function fishSwim() {
+        translateSet("down");
+        setTimeout(fishSwim, 500);
+    }
+
+    function flipStage() {
+        rotateOrthogonally("up");
+        rotateOrthogonally("up");
+        setTimeout(flipStage, 15000);
+    }
+
+    flipStage();
+    fishSwim();
+    </script>
+</html>
