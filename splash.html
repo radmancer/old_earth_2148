@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <!--Written and Directed By James Scott McDowell-->
+        <title>Singularity</title>
+        <link rel="stylesheet" href="css/radlab.css">
+		<link rel="stylesheet" href="css/w3.css">
+        <style>
+            @font-face {
+                font-family:gothamRoundedMedium;
+                src: url("css/fonts/GothamRoundedMedium_21022.ttf");
+            }
+            @font-face {
+                font-family:gothamRoundedLight;
+                src: url("css/fonts/GothamRounded-Light.otf");
+            }
+            body{
+                background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)), url("css/images/test.jpg");
+                background-position: 50% 80%;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            span{
+                font-family:gothamRoundedMedium;
+                color:white;
+            }
+            .layoutGrid{
+                display:grid;
+                grid-template-columns:5vw 13vw 10vw 56vw 11vw 5vw;
+                grid-template-rows:29vh 7vh 29vh 2vh 2vh 2vh 8vh 1vh 8vh 6.5vh 1.5vh 4vh;
+            }
+            .logoGraphic{
+                grid-column-start:3;
+                grid-column-end:4;
+                grid-row-start:2;
+                grid-row-end:3;
+                background-image: url("css/images/black_hole.png");
+                filter:invert(100%);
+                background-size:10vw;
+                background-repeat:no-repeat;
+                background-position:50% 50%;
+            }
+            .logoText{
+                grid-column-start:4;
+                grid-column-end:5;
+                grid-row-start:2;
+                grid-row-end:3;
+                font-size:10.7vw;
+                padding-bottom:0.7vh;
+            }
+            .legalesePart1{
+                grid-column-start:1;
+                grid-column-end:7;
+                grid-row-start:4;
+                grid-row-end:5;
+                font-size:2.5vw;
+                font-family:gothamRoundedLight;
+            }
+            .legalesePart2{
+                grid-column-start:1;
+                grid-column-end:7;
+                grid-row-start:5;
+                grid-row-end:6;
+                font-size:2.5vw;
+                font-family:gothamRoundedLight;
+            }
+            .okayFine{
+                grid-column-start:2;
+                grid-column-end:6;
+                grid-row-start:7;
+                grid-row-end:8;
+                font-size:5vw;
+                background-image: linear-gradient(to right, rgb(0, 133, 0) , #00fd00);
+            }
+            .loginWith{
+                grid-column-start:2;
+                grid-column-end:6;
+                grid-row-start:9;
+                grid-row-end:10;
+                font-size:3vw;
+                background-color: transparent;
+                border-style: solid;
+                border-color: white;
+            }
+            .explanation{
+                grid-column-start:1;
+                grid-column-end:7;
+                grid-row-start:10;
+                grid-row-end:11;
+                font-size:3vw;
+            }
+            .confidentiality{
+                grid-column-start:1;
+                grid-column-end:7;
+                grid-row-start:11;
+                grid-row-end:12;
+                font-size:3vw;               
+            }
+
+        </style>
+    </head>
+    <body>
+	<div class="layoutGrid">
+        <div class="logoGraphic w3-spin"></div>
+        <div class="logoText centerXY noselect"><span>singularity</span></div>
+        <div class="legalesePart1 centerXY noselect" style="font-family:gothamRoundedLight;color:white">By tapping "okay fine" you hitherforth agree with our</div>
+        <div class="legalesePart2 centerXY noselect" style="font-family:gothamRoundedLight;color:white">Terms of Service and&nbsp;<a href="#">"Privacy" Policy</a>.</div>
+        <div class="okayFine centerXY largeRadius noselect" onclick="location.href = 'singularity.html';"><span>OKAY FINE</span></div>
+        <div class="loginWith centerXY largeRadius noselect" onclick="location.href = 'singularity.html';"><span>LOG IN WITH SOCIAL SECURITY NUMBER</span></div>
+        <div class="explanation centerXY noselect"><span><a href="#">Watch the commercial</a></span></div>
+        <div class="confidentiality centerXY noselect" style="font-family:gothamRoundedLight;color:white">(We won't tell anyone you're doing this.)</div>
+	</div>
+    </body>
+</html>
