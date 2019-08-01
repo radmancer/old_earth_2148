@@ -99,7 +99,7 @@ function createCursor(){
 	cssText = "width:" + voxelDimension + "px;"
                 + "height:" + voxelDimension + "px;"
                 + "transform: rotateY(0deg);"
-                + "background-image: url('css/fish.gif');"
+                + "background-image: url('css/images/fish.gif');"
                 + "background-size: 100%;"
                 + "background-repeat: no-repeat;"
                 + "background-position: 49.8% 50%;";
@@ -244,7 +244,7 @@ function capturePoint(){
                 + "height:" + voxelDimension + "px;"
                 + "transform: rotateY(0deg);"
 				+ "background-color:" + cursorVoxelColor + ";"
-                + "background-image: url('css/fish.gif');"
+                + "background-image: url('css/images/fish.gif');"
                 + "background-size: 100%;"
                 + "background-repeat: no-repeat;"
                 + "background-position: 49.8% 50%;";
